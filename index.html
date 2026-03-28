@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan Repayment Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg: #0a0e1a;
+--surface: #111827;
+--surface2: #1a2235;
+--border: rgba(255,255,255,0.07);
+--text: #e8eaf0;
+--muted: #6b7590;
+--accent: #4f9eff;
+--accent2: #7c3aed;
+--green: #10b981;
+--red: #ef4444;
+--orange: #f59e0b;
+--yellow: #fbbf24;
+--pl2-color: #ef4444;
+--pl1-color: #4f9eff;
+--consumer-color: #f59e0b;
+--vehicle-color: #10b981;
+--radius: 12px;
+--font-display: 'Syne', sans-serif;
+--font-mono: 'DM Mono', monospace;
+--font-body: 'DM Sans', sans-serif;
+}
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: var(–font-body);
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* Background grid */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image:
+linear-gradient(rgba(79,158,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(79,158,255,0.03) 1px, transparent 1px);
+background-size: 40px 40px;
+pointer-events: none;
+z-index: 0;
+}
+
+.glow-orb {
+position: fixed;
+width: 600px; height: 600px;
+border-radius: 50%;
+filter: blur(120px);
+opacity: 0.12;
+pointer-events: none;
+z-index: 0;
+}
+.glow-orb.one { background: #4f9eff; top: -200px; left: -100px; }
+.glow-orb.two { background: #7c3aed; bottom: -200px; right: -100px; }
+
+/* ── Layout ── */
+.wrapper { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* ── Header ── */
+header {
+padding: 40px 0 32px;
+display: flex;
+align-items: flex-end;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 16px;
+border-bottom: 1px solid var(–border);
+margin-bottom: 40px;
+}
+
+.logo-area h1 {
+font-family: var(–font-display);
+font-size: clamp(24px, 4vw, 38px);
+font-weight: 800;
+letter-spacing: -1px;
+background: linear-gradient(135deg, #e8eaf0 0%, #4f9eff 60%, #7c3aed 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+line-height: 1;
+}
+.logo-area p {
+font-family: var(–font-mono);
+font-size: 11px;
+color: var(–muted);
+margin-top: 6px;
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+
+.header-stats {
+display: flex;
+gap: 24px;
+flex-wrap: wrap;
+}
+.hstat {
+text-align: right;
+}
+.hstat-val {
+font-family: var(–font-display);
+font-size: 22px;
+font-weight: 700;
+}
+.hstat-label {
+font-family: var(–font-mono);
+font-size: 10px;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 1.5px;
+}
+
+/* ── Section title ── */
+.section-title {
+font-family: var(–font-display);
+font-size: 13px;
+font-weight: 700;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 16px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.section-title::after {
+content: ‘’;
+flex: 1;
+height: 1px;
+background: var(–border);
+}
+
+/* ── Loan Cards ── */
+.loan-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+gap: 16px;
+margin-bottom: 48px;
+}
+
+.loan-card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–radius);
+padding: 24px;
+position: relative;
+overflow: hidden;
+transition: transform 0.2s, border-color 0.2s;
+cursor: pointer;
+}
+.loan-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.15); }
+.loan-card::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 3px;
+border-radius: var(–radius) var(–radius) 0 0;
+}
+.loan-card[data-loan=“pl2”]::before { background: var(–pl2-color); }
+.loan-card[data-loan=“pl1”]::before { background: var(–pl1-color); }
+.loan-card[data-loan=“consumer”]::before { background: var(–consumer-color); }
+.loan-card[data-loan=“vehicle”]::before { background: var(–vehicle-color); }
+
+.loan-card-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 20px;
+}
+.loan-name {
+font-family: var(–font-display);
+font-size: 14px;
+font-weight: 700;
+letter-spacing: 0.5px;
+}
+.loan-bank {
+font-family: var(–font-mono);
+font-size: 10px;
+color: var(–muted);
+margin-top: 3px;
+letter-spacing: 1px;
+}
+.priority-badge {
+font-family: var(–font-mono);
+font-size: 10px;
+font-weight: 500;
+padding: 3px 8px;
+border-radius: 20px;
+letter-spacing: 1px;
+}
+.loan-card[data-loan=“pl2”] .priority-badge { background: rgba(239,68,68,0.15); color: var(–pl2-color); }
+.loan-card[data-loan=“pl1”] .priority-badge { background: rgba(79,158,255,0.15); color: var(–pl1-color); }
+.loan-card[data-loan=“consumer”] .priority-badge { background: rgba(245,158,11,0.15); color: var(–consumer-color); }
+.loan-card[data-loan=“vehicle”] .priority-badge { background: rgba(16,185,129,0.15); color: var(–vehicle-color); }
+
+.balance-display {
+margin-bottom: 16px;
+}
+.balance-label {
+font-family: var(–font-mono);
+font-size: 10px;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 1.5px;
+margin-bottom: 4px;
+}
+.balance-amount {
+font-family: var(–font-display);
+font-size: 28px;
+font-weight: 700;
+letter-spacing: -1px;
+}
+
+.progress-bar {
+height: 4px;
+background: rgba(255,255,255,0.06);
+border-radius: 2px;
+margin: 12px 0 16px;
+overflow: hidden;
+}
+.progress-fill {
+height: 100%;
+border-radius: 2px;
+transition: width 0.6s ease;
+}
+.loan-card[data-loan=“pl2”] .progress-fill { background: var(–pl2-color); }
+.loan-card[data-loan=“pl1”] .progress-fill { background: var(–pl1-color); }
+.loan-card[data-loan=“consumer”] .progress-fill { background: var(–consumer-color); }
+.loan-card[data-loan=“vehicle”] .progress-fill { background: var(–vehicle-color); }
+
+.loan-meta {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+}
+.meta-item {}
+.meta-label {
+font-family: var(–font-mono);
+font-size: 9px;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 1.5px;
+}
+.meta-val {
+font-family: var(–font-mono);
+font-size: 13px;
+font-weight: 500;
+margin-top: 2px;
+}
+
+.total-interest-chip {
+margin-top: 14px;
+padding: 8px 12px;
+background: rgba(239,68,68,0.08);
+border: 1px solid rgba(239,68,68,0.15);
+border-radius: 8px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.tic-label {
+font-family: var(–font-mono);
+font-size: 9px;
+color: #ef4444;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+.tic-val {
+font-family: var(–font-mono);
+font-size: 13px;
+font-weight: 500;
+color: #ef4444;
+}
+
+/* ── Log Payment Panel ── */
+.panel-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+margin-bottom: 48px;
+}
+@media (max-width: 800px) { .panel-grid { grid-template-columns: 1fr; } }
+
+.panel {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–radius);
+padding: 28px;
+}
+.panel-title {
+font-family: var(–font-display);
+font-size: 16px;
+font-weight: 700;
+margin-bottom: 20px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.form-group { margin-bottom: 16px; }
+.form-label {
+display: block;
+font-family: var(–font-mono);
+font-size: 10px;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 1.5px;
+margin-bottom: 6px;
+}
+.form-control {
+width: 100%;
+background: var(–surface2);
+border: 1px solid var(–border);
+border-radius: 8px;
+color: var(–text);
+font-family: var(–font-mono);
+font-size: 14px;
+padding: 10px 14px;
+outline: none;
+transition: border-color 0.2s;
+-webkit-appearance: none;
+}
+.form-control:focus { border-color: var(–accent); }
+.form-control option { background: var(–surface); }
+
+.btn {
+width: 100%;
+padding: 12px;
+border: none;
+border-radius: 8px;
+font-family: var(–font-display);
+font-size: 14px;
+font-weight: 700;
+letter-spacing: 0.5px;
+cursor: pointer;
+transition: all 0.2s;
+}
+.btn-primary {
+background: linear-gradient(135deg, #4f9eff, #7c3aed);
+color: white;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-danger {
+background: rgba(239,68,68,0.15);
+color: var(–red);
+border: 1px solid rgba(239,68,68,0.3);
+margin-top: 8px;
+}
+.btn-danger:hover { background: rgba(239,68,68,0.25); }
+
+/* ── Budget Panel ── */
+.budget-rows { display: flex; flex-direction: column; gap: 10px; }
+.budget-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px 14px;
+background: var(–surface2);
+border-radius: 8px;
+}
+.budget-row-label {
+font-family: var(–font-mono);
+font-size: 12px;
+color: var(–muted);
+}
+.budget-row-val {
+font-family: var(–font-display);
+font-size: 15px;
+font-weight: 700;
+}
+.budget-row.surplus .budget-row-label { color: var(–green); }
+.budget-row.surplus .budget-row-val { color: var(–green); }
+
+/* ── Payments Table ── */
+.table-wrap {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–radius);
+overflow: hidden;
+margin-bottom: 48px;
+}
+.table-header-bar {
+padding: 20px 24px;
+border-bottom: 1px solid var(–border);
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 12px;
+}
+.table-title {
+font-family: var(–font-display);
+font-size: 16px;
+font-weight: 700;
+}
+.filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill {
+font-family: var(–font-mono);
+font-size: 10px;
+padding: 4px 12px;
+border-radius: 20px;
+border: 1px solid var(–border);
+background: transparent;
+color: var(–muted);
+cursor: pointer;
+transition: all 0.2s;
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+.pill.active, .pill:hover {
+background: var(–accent);
+color: white;
+border-color: var(–accent);
+}
+
+table { width: 100%; border-collapse: collapse; }
+th {
+font-family: var(–font-mono);
+font-size: 10px;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 1.5px;
+padding: 12px 20px;
+text-align: left;
+border-bottom: 1px solid var(–border);
+white-space: nowrap;
+}
+td {
+font-family: var(–font-mono);
+font-size: 13px;
+padding: 14px 20px;
+border-bottom: 1px solid var(–border);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+
+.loan-dot {
+display: inline-block;
+width: 8px; height: 8px;
+border-radius: 50%;
+margin-right: 8px;
+vertical-align: middle;
+}
+.type-badge {
+font-size: 9px;
+padding: 2px 8px;
+border-radius: 4px;
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+.type-emi { background: rgba(79,158,255,0.12); color: var(–accent); }
+.type-extra { background: rgba(16,185,129,0.12); color: var(–green); }
+.type-lumpsum { background: rgba(251,191,36,0.12); color: var(–yellow); }
+
+.delete-btn {
+background: none;
+border: none;
+color: var(–muted);
+cursor: pointer;
+font-size: 14px;
+padding: 4px 8px;
+border-radius: 4px;
+transition: all 0.2s;
+}
+.delete-btn:hover { color: var(–red); background: rgba(239,68,68,0.1); }
+
+.empty-state {
+text-align: center;
+padding: 60px 20px;
+color: var(–muted);
+font-family: var(–font-mono);
+font-size: 13px;
+}
+.empty-state .icon { font-size: 32px; margin-bottom: 12px; }
+
+/* ── Timeline ── */
+.timeline-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+gap: 12px;
+margin-bottom: 48px;
+}
+.timeline-card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–radius);
+padding: 20px;
+position: relative;
+}
+.timeline-card.done {
+border-color: rgba(16,185,129,0.3);
+background: rgba(16,185,129,0.05);
+}
+.timeline-card.active-phase {
+border-color: rgba(79,158,255,0.4);
+background: rgba(79,158,255,0.05);
+}
+.tl-phase {
+font-family: var(–font-mono);
+font-size: 9px;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 2px;
+margin-bottom: 8px;
+}
+.tl-loan {
+font-family: var(–font-display);
+font-size: 14px;
+font-weight: 700;
+margin-bottom: 4px;
+}
+.tl-date {
+font-family: var(–font-mono);
+font-size: 12px;
+color: var(–muted);
+margin-bottom: 12px;
+}
+.tl-status {
+font-family: var(–font-mono);
+font-size: 11px;
+padding: 4px 10px;
+border-radius: 6px;
+display: inline-block;
+}
+.tl-status.done { background: rgba(16,185,129,0.15); color: var(–green); }
+.tl-status.active { background: rgba(79,158,255,0.15); color: var(–accent); }
+.tl-status.pending { background: rgba(255,255,255,0.05); color: var(–muted); }
+
+/* ── Toast ── */
+#toast {
+position: fixed;
+bottom: 32px; right: 32px;
+background: var(–surface);
+border: 1px solid var(–green);
+color: var(–green);
+font-family: var(–font-mono);
+font-size: 13px;
+padding: 14px 20px;
+border-radius: 10px;
+transform: translateY(80px);
+opacity: 0;
+transition: all 0.3s;
+z-index: 1000;
+max-width: 320px;
+}
+#toast.show { transform: translateY(0); opacity: 1; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+.loan-grid { grid-template-columns: 1fr; }
+header { flex-direction: column; align-items: flex-start; }
+.header-stats { justify-content: flex-start; }
+.hstat { text-align: left; }
+th, td { padding: 10px 12px; }
+}
+
+.updated-label {
+font-family: var(–font-mono);
+font-size: 10px;
+color: var(–muted);
+text-align: right;
+margin-top: -30px;
+margin-bottom: 40px;
+}
+</style>
+
+</head>
+<body>
+<div class="glow-orb one"></div>
+<div class="glow-orb two"></div>
+
+<div class="wrapper">
+
+<!-- Header -->
+
+<header>
+<div class="logo-area">
+<h1>Loan Tracker</h1>
+<p>Avalanche Strategy · Debt-Free by Mar 2028</p>
+</div>
+<div class="header-stats">
+<div class="hstat">
+<div class="hstat-val" id="total-balance-hdr" style="color:var(--red)">—</div>
+<div class="hstat-label">Total Debt</div>
+</div>
+<div class="hstat">
+<div class="hstat-val" id="total-interest-hdr" style="color:var(--orange)">—</div>
+<div class="hstat-label">Total Interest</div>
+</div>
+<div class="hstat">
+<div class="hstat-val" style="color:var(--green)" id="surplus-hdr">₹14,100</div>
+<div class="hstat-label">Monthly Surplus</div>
+</div>
+</div>
+</header>
+
+<!-- Loan Cards -->
+
+<div class="section-title">Active Loans</div>
+<div class="loan-grid" id="loan-cards"></div>
+
+<!-- Budget + Log Payment -->
+
+<div class="section-title">Budget & Payments</div>
+<div class="panel-grid">
+
+```
+<!-- Budget -->
+<div class="panel">
+<div class="panel-title">📊 Monthly Budget</div>
+<div class="budget-rows">
+<div class="budget-row">
+<span class="budget-row-label">Monthly Income</span>
+<span class="budget-row-val">₹1,15,000</span>
+</div>
+<div class="budget-row">
+<span class="budget-row-label">Total EMIs</span>
+<span class="budget-row-val" id="budget-emis">—</span>
+</div>
+<div class="budget-row">
+<span class="budget-row-label">Fixed Expenses</span>
+<span class="budget-row-val">₹30,500</span>
+</div>
+<div class="budget-row surplus">
+<span class="budget-row-label">Monthly Surplus →</span>
+<span class="budget-row-val" id="budget-surplus">—</span>
+</div>
+</div>
+
+<div style="margin-top:20px;">
+<div class="section-title" style="font-size:11px; margin-bottom:12px;">Lump Sum Schedule</div>
+<div style="display:flex; flex-direction:column; gap:8px;" id="lump-schedule"></div>
+</div>
+</div>
+
+<!-- Log Payment -->
+<div class="panel">
+<div class="panel-title">💳 Log a Payment</div>
+<div class="form-group">
+<label class="form-label">Loan</label>
+<select class="form-control" id="pay-loan">
+<option value="pl2">Personal Loan 2 — HDFC 4343</option>
+<option value="pl1">Personal Loan 1 — HDFC 5795</option>
+<option value="consumer">Consumer Loan — HDFC 5465</option>
+<option value="vehicle">Vehicle Loan — SBI 3161</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label">Payment Type</label>
+<select class="form-control" id="pay-type">
+<option value="emi">Regular EMI</option>
+<option value="extra">Extra Payment (Surplus)</option>
+<option value="lumpsum">Lump Sum</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label">Amount (₹)</label>
+<input class="form-control" type="number" id="pay-amount" placeholder="e.g. 10900">
+</div>
+<div class="form-group">
+<label class="form-label">Date</label>
+<input class="form-control" type="date" id="pay-date">
+</div>
+<div class="form-group">
+<label class="form-label">Note (optional)</label>
+<input class="form-control" type="text" id="pay-note" placeholder="e.g. March EMI, Bonus prepayment">
+</div>
+<button class="btn btn-primary" onclick="logPayment()">Record Payment</button>
+</div>
+```
+
+</div>
+
+<!-- Payment History -->
+
+<div class="section-title">Payment History</div>
+<div class="table-wrap">
+<div class="table-header-bar">
+<div class="table-title">All Transactions</div>
+<div class="filter-pills">
+<button class="pill active" onclick="filterPayments('all', this)">All</button>
+<button class="pill" onclick="filterPayments('pl2', this)">PL2</button>
+<button class="pill" onclick="filterPayments('pl1', this)">PL1</button>
+<button class="pill" onclick="filterPayments('consumer', this)">Consumer</button>
+<button class="pill" onclick="filterPayments('vehicle', this)">Vehicle</button>
+</div>
+</div>
+<div style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Loan</th>
+<th>Type</th>
+<th>Amount</th>
+<th>Note</th>
+<th></th>
+</tr>
+</thead>
+<tbody id="payments-tbody">
+<tr><td colspan="6"><div class="empty-state"><div class="icon">📭</div>No payments logged yet</div></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- Timeline -->
+
+<div class="section-title">Repayment Timeline</div>
+<div class="timeline-grid">
+<div class="timeline-card active-phase">
+<div class="tl-phase">Phase 1 · Priority #1</div>
+<div class="tl-loan" style="color:var(--pl2-color)">Personal Loan 2</div>
+<div class="tl-date">HDFC 4343 · 10.9% p.a.</div>
+<div class="tl-date">Target: Oct 2026</div>
+<span class="tl-status active">In Progress</span>
+</div>
+<div class="timeline-card">
+<div class="tl-phase">Phase 2 · Priority #3</div>
+<div class="tl-loan" style="color:var(--consumer-color)">Consumer Loan</div>
+<div class="tl-date">HDFC 5465 · 10.08% p.a.</div>
+<div class="tl-date">Target: Nov 2026</div>
+<span class="tl-status pending">Pending</span>
+</div>
+<div class="timeline-card">
+<div class="tl-phase">Phase 3 · Priority #4</div>
+<div class="tl-loan" style="color:var(--vehicle-color)">Vehicle Loan</div>
+<div class="tl-date">SBI 3161 · 8.5% p.a.</div>
+<div class="tl-date">Target: May 2027</div>
+<span class="tl-status pending">Pending</span>
+</div>
+<div class="timeline-card">
+<div class="tl-phase">Phase 4 · Priority #2</div>
+<div class="tl-loan" style="color:var(--pl1-color)">Personal Loan 1</div>
+<div class="tl-date">HDFC 5795 · 10.8% p.a.</div>
+<div class="tl-date">Target: Mar 2028</div>
+<span class="tl-status pending">Pending</span>
+</div>
+</div>
+
+</div><!-- /wrapper -->
+
+<div id="toast"></div>
+
+<script>
+// ── Initial Loan Data ─────────────────────────────────────────────────────────
+const LOANS_INIT = {
+pl2: { name:"Personal Loan 2", bank:"HDFC Bank", ac:"4343", balance:461302, emi:10900, rate:10.9, original:500000, color:"var(--pl2-color)", priority:"#1 ATTACK NOW" },
+pl1: { name:"Personal Loan 1", bank:"HDFC Bank", ac:"5795", balance:986635, emi:39500, rate:10.8, original:1540000, color:"var(--pl1-color)", priority:"#2" },
+consumer: { name:"Consumer Loan", bank:"HDFC Bank", ac:"5465", balance:301178, emi:9500, rate:10.08, original:300000, color:"var(--consumer-color)", priority:"#3" },
+vehicle: { name:"Vehicle Loan", bank:"SBI", ac:"3161", balance:270000, emi:10500, rate:8.5, original:650000, color:"var(--vehicle-color)", priority:"#4 LAST" },
+};
+
+const LUMP_SCHEDULE = [
+{ month:"Mar 2026", amount:100000, loan:"pl2", label:"₹1,00,000 → PL2", note:"Transfer NOW" },
+{ month:"May 2026", amount:70000, loan:"pl2", label:"₹70,000 → PL2", note:"May bonus" },
+{ month:"Oct 2026", amount:200000, loan:"consumer", label:"₹2,00,000 → Consumer", note:"Closes Consumer" },
+{ month:"Nov 2026", amount:70000, loan:"consumer", label:"₹70,000 → Consumer", note:"Final close" },
+];
+
+const STORAGE_KEY = "loantracker_payments_v1";
+const BALANCES_KEY = "loantracker_balances_v1";
+
+// ── Storage ───────────────────────────────────────────────────────────────────
+function getPayments() {
+try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
+catch(e) { return []; }
+}
+function savePayments(p) {
+localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+}
+function getBalances() {
+try {
+const b = JSON.parse(localStorage.getItem(BALANCES_KEY));
+if (b) return b;
+} catch(e) {}
+return { pl2:461302, pl1:986635, consumer:301178, vehicle:270000 };
+}
+function saveBalances(b) {
+localStorage.setItem(BALANCES_KEY, JSON.stringify(b));
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function inr(n) {
+if (n === null || n === undefined) return "—";
+return "₹" + Math.abs(Math.round(n)).toLocaleString("en-IN");
+}
+function calcMonthlyInterest(balance, annualRate) {
+return balance * (annualRate / 100 / 12);
+}
+function calcTotalInterest(balance, annualRate, emi) {
+let bal = balance, total = 0, months = 0;
+const mr = annualRate / 100 / 12;
+while (bal > 0 && months < 600) {
+const int = bal * mr;
+total += int;
+bal = Math.max(0, bal - (emi - int));
+months++;
+}
+return Math.round(total);
+}
+function loanColor(key) {
+const map = { pl2:"#ef4444", pl1:"#4f9eff", consumer:"#f59e0b", vehicle:"#10b981" };
+return map[key] || "#888";
+}
+
+// ── Render Loan Cards ─────────────────────────────────────────────────────────
+function renderCards() {
+const balances = getBalances();
+const container = document.getElementById("loan-cards");
+container.innerHTML = "";
+
+let totalBalance = 0, totalEmi = 0, totalInterest = 0;
+
+for (const [key, loan] of Object.entries(LOANS_INIT)) {
+const bal = balances[key] ?? loan.balance;
+const pct = Math.round(((loan.original - bal) / loan.original) * 100);
+const totalInt = calcTotalInterest(bal, loan.rate, loan.emi);
+totalBalance += bal;
+totalEmi += loan.emi;
+totalInterest += totalInt;
+
+const card = document.createElement("div");
+card.className = "loan-card";
+card.dataset.loan = key;
+card.innerHTML = `
+<div class="loan-card-header">
+<div>
+<div class="loan-name">${loan.name}</div>
+<div class="loan-bank">${loan.bank} · A/C ···${loan.ac}</div>
+</div>
+<span class="priority-badge">${loan.priority}</span>
+</div>
+<div class="balance-display">
+<div class="balance-label">Current Balance</div>
+<div class="balance-amount">${inr(bal)}</div>
+</div>
+<div class="progress-bar">
+<div class="progress-fill" style="width:${pct}%"></div>
+</div>
+<div class="loan-meta">
+<div class="meta-item">
+<div class="meta-label">Monthly EMI</div>
+<div class="meta-val">${inr(loan.emi)}</div>
+</div>
+<div class="meta-item">
+<div class="meta-label">Interest Rate</div>
+<div class="meta-val">${loan.rate}% p.a.</div>
+</div>
+<div class="meta-item">
+<div class="meta-label">Paid Off</div>
+<div class="meta-val">${pct}%</div>
+</div>
+<div class="meta-item">
+<div class="meta-label">Monthly Interest</div>
+<div class="meta-val" style="color:#f59e0b">${inr(calcMonthlyInterest(bal, loan.rate))}</div>
+</div>
+</div>
+<div class="total-interest-chip">
+<span class="tic-label">Total Interest Remaining</span>
+<span class="tic-val">${inr(totalInt)}</span>
+</div>
+`;
+container.appendChild(card);
+}
+
+// Update header stats
+document.getElementById("total-balance-hdr").textContent = inr(totalBalance);
+document.getElementById("total-interest-hdr").textContent = inr(totalInterest);
+
+// Budget row
+const surplus = 115000 - totalEmi - 30500;
+document.getElementById("budget-emis").textContent = inr(totalEmi);
+document.getElementById("budget-surplus").textContent = inr(surplus);
+document.getElementById("surplus-hdr").textContent = inr(surplus);
+}
+
+// ── Render Lump Schedule ──────────────────────────────────────────────────────
+function renderLumpSchedule() {
+const container = document.getElementById("lump-schedule");
+container.innerHTML = "";
+LUMP_SCHEDULE.forEach(ls => {
+const div = document.createElement("div");
+div.style.cssText = `
+display:flex; justify-content:space-between; align-items:center;
+padding:8px 12px; background:var(--surface2); border-radius:8px;
+border-left:3px solid ${loanColor(ls.loan)};
+`;
+div.innerHTML = `
+<div>
+<div style="font-family:var(--font-mono);font-size:11px;color:var(--text)">${ls.label}</div>
+<div style="font-family:var(--font-mono);font-size:10px;color:var(--muted)">${ls.note}</div>
+</div>
+<div style="font-family:var(--font-mono);font-size:10px;color:var(--muted)">${ls.month}</div>
+`;
+container.appendChild(div);
+});
+}
+
+// ── Log Payment ───────────────────────────────────────────────────────────────
+function logPayment() {
+const loan = document.getElementById("pay-loan").value;
+const type = document.getElementById("pay-type").value;
+const amount = parseFloat(document.getElementById("pay-amount").value);
+const date = document.getElementById("pay-date").value;
+const note = document.getElementById("pay-note").value.trim();
+
+if (!amount || amount <= 0) { showToast("⚠️ Please enter a valid amount", true); return; }
+if (!date) { showToast("⚠️ Please select a date", true); return; }
+
+const payments = getPayments();
+payments.unshift({ id: Date.now(), loan, type, amount, date, note });
+savePayments(payments);
+
+// Update balance
+const balances = getBalances();
+balances[loan] = Math.max(0, (balances[loan] ?? LOANS_INIT[loan].balance) - amount);
+saveBalances(balances);
+
+// Reset form
+document.getElementById("pay-amount").value = "";
+document.getElementById("pay-note").value = "";
+
+renderCards();
+renderTable("all");
+showToast(`✅ ${inr(amount)} recorded for ${LOANS_INIT[loan].name}`);
+}
+
+// ── Render Table ──────────────────────────────────────────────────────────────
+let currentFilter = "all";
+
+function filterPayments(filter, el) {
+currentFilter = filter;
+document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+if (el) el.classList.add("active");
+renderTable(filter);
+}
+
+function renderTable(filter) {
+const payments = getPayments();
+const tbody = document.getElementById("payments-tbody");
+const filtered = filter === "all" ? payments : payments.filter(p => p.loan === filter);
+
+if (!filtered.length) {
+tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><div class="icon">📭</div>No payments logged yet</div></td></tr>`;
+return;
+}
+
+tbody.innerHTML = filtered.map(p => {
+const loan = LOANS_INIT[p.loan];
+const typeClass = { emi:"type-emi", extra:"type-extra", lumpsum:"type-lumpsum" }[p.type] || "type-emi";
+const typeLabel = { emi:"EMI", extra:"Extra", lumpsum:"Lump Sum" }[p.type] || p.type;
+const dateStr = new Date(p.date).toLocaleDateString("en-IN", { day:"2-digit", month:"short", year:"numeric" });
+return `
+<tr>
+<td>${dateStr}</td>
+<td>
+<span class="loan-dot" style="background:${loanColor(p.loan)}"></span>
+${loan?.name ?? p.loan} <span style="color:var(--muted)">···${loan?.ac ?? ""}</span>
+</td>
+<td><span class="type-badge ${typeClass}">${typeLabel}</span></td>
+<td style="color:var(--green);font-weight:500">${inr(p.amount)}</td>
+<td style="color:var(--muted)">${p.note || "—"}</td>
+<td><button class="delete-btn" onclick="deletePayment(${p.id})">✕</button></td>
+</tr>
+`;
+}).join("");
+}
+
+// ── Delete Payment ────────────────────────────────────────────────────────────
+function deletePayment(id) {
+const payments = getPayments();
+const p = payments.find(x => x.id === id);
+if (!p) return;
+
+// Restore balance
+const balances = getBalances();
+balances[p.loan] = Math.min(
+LOANS_INIT[p.loan].original,
+(balances[p.loan] ?? LOANS_INIT[p.loan].balance) + p.amount
+);
+saveBalances(balances);
+
+const updated = payments.filter(x => x.id !== id);
+savePayments(updated);
+renderCards();
+renderTable(currentFilter);
+showToast("🗑️ Payment deleted and balance restored");
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(msg, isError = false) {
+const t = document.getElementById("toast");
+t.textContent = msg;
+t.style.borderColor = isError ? "var(--red)" : "var(--green)";
+t.style.color = isError ? "var(--red)" : "var(--green)";
+t.classList.add("show");
+setTimeout(() => t.classList.remove("show"), 3000);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.getElementById("pay-date").valueAsDate = new Date();
+renderCards();
+renderLumpSchedule();
+renderTable("all");
+</script>
+
+</body>
+</html>
