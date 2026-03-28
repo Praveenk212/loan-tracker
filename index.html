@@ -30,12 +30,12 @@
 --font-body: 'DM Sans', sans-serif;
 }
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-background: var(â€“bg);
-color: var(â€“text);
-font-family: var(â€“font-body);
+background: var(â€"bg);
+color: var(â€"text);
+font-family: var(â€"font-body);
 min-height: 100vh;
 overflow-x: hidden;
 }
@@ -65,10 +65,10 @@ z-index: 0;
 .glow-orb.one { background: #4f9eff; top: -200px; left: -100px; }
 .glow-orb.two { background: #7c3aed; bottom: -200px; right: -100px; }
 
-/* â”€â”€ Layout â”€â”€ */
+/* â"€â"€ Layout â"€â"€ */
 .wrapper { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 0 24px 80px; }
 
-/* â”€â”€ Header â”€â”€ */
+/* â"€â"€ Header â"€â"€ */
 header {
 padding: 40px 0 32px;
 display: flex;
@@ -76,12 +76,12 @@ align-items: flex-end;
 justify-content: space-between;
 flex-wrap: wrap;
 gap: 16px;
-border-bottom: 1px solid var(â€“border);
+border-bottom: 1px solid var(â€"border);
 margin-bottom: 40px;
 }
 
 .logo-area h1 {
-font-family: var(â€“font-display);
+font-family: var(â€"font-display);
 font-size: clamp(24px, 4vw, 38px);
 font-weight: 800;
 letter-spacing: -1px;
@@ -92,9 +92,9 @@ background-clip: text;
 line-height: 1;
 }
 .logo-area p {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 11px;
-color: var(â€“muted);
+color: var(â€"muted);
 margin-top: 6px;
 letter-spacing: 2px;
 text-transform: uppercase;
@@ -109,26 +109,26 @@ flex-wrap: wrap;
 text-align: right;
 }
 .hstat-val {
-font-family: var(â€“font-display);
+font-family: var(â€"font-display);
 font-size: 22px;
 font-weight: 700;
 }
 .hstat-label {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 10px;
-color: var(â€“muted);
+color: var(â€"muted);
 text-transform: uppercase;
 letter-spacing: 1.5px;
 }
 
-/* â”€â”€ Section title â”€â”€ */
+/* â"€â"€ Section title â"€â"€ */
 .section-title {
-font-family: var(â€“font-display);
+font-family: var(â€"font-display);
 font-size: 13px;
 font-weight: 700;
 letter-spacing: 3px;
 text-transform: uppercase;
-color: var(â€“muted);
+color: var(â€"muted);
 margin-bottom: 16px;
 display: flex;
 align-items: center;
@@ -138,10 +138,10 @@ gap: 10px;
 content: â€˜â€™;
 flex: 1;
 height: 1px;
-background: var(â€“border);
+background: var(â€"border);
 }
 
-/* â”€â”€ Loan Cards â”€â”€ */
+/* â"€â"€ Loan Cards â"€â"€ */
 .loan-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -150,9 +150,9 @@ margin-bottom: 48px;
 }
 
 .loan-card {
-background: var(â€“surface);
-border: 1px solid var(â€“border);
-border-radius: var(â€“radius);
+background: var(â€"surface);
+border: 1px solid var(â€"border);
+border-radius: var(â€"radius);
 padding: 24px;
 position: relative;
 overflow: hidden;
@@ -165,12 +165,12 @@ content: â€˜â€™;
 position: absolute;
 top: 0; left: 0; right: 0;
 height: 3px;
-border-radius: var(â€“radius) var(â€“radius) 0 0;
+border-radius: var(â€"radius) var(â€"radius) 0 0;
 }
-.loan-card[data-loan=â€œpl2â€]::before { background: var(â€“pl2-color); }
-.loan-card[data-loan=â€œpl1â€]::before { background: var(â€“pl1-color); }
-.loan-card[data-loan=â€œconsumerâ€]::before { background: var(â€“consumer-color); }
-.loan-card[data-loan=â€œvehicleâ€]::before { background: var(â€“vehicle-color); }
+.loan-card[data-loan=â€œpl2â€]::before { background: var(â€"pl2-color); }
+.loan-card[data-loan=â€œpl1â€]::before { background: var(â€"pl1-color); }
+.loan-card[data-loan=â€œconsumerâ€]::before { background: var(â€"consumer-color); }
+.loan-card[data-loan=â€œvehicleâ€]::before { background: var(â€"vehicle-color); }
 
 .loan-card-header {
 display: flex;
@@ -179,44 +179,44 @@ align-items: flex-start;
 margin-bottom: 20px;
 }
 .loan-name {
-font-family: var(â€“font-display);
+font-family: var(â€"font-display);
 font-size: 14px;
 font-weight: 700;
 letter-spacing: 0.5px;
 }
 .loan-bank {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 10px;
-color: var(â€“muted);
+color: var(â€"muted);
 margin-top: 3px;
 letter-spacing: 1px;
 }
 .priority-badge {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 10px;
 font-weight: 500;
 padding: 3px 8px;
 border-radius: 20px;
 letter-spacing: 1px;
 }
-.loan-card[data-loan=â€œpl2â€] .priority-badge { background: rgba(239,68,68,0.15); color: var(â€“pl2-color); }
-.loan-card[data-loan=â€œpl1â€] .priority-badge { background: rgba(79,158,255,0.15); color: var(â€“pl1-color); }
-.loan-card[data-loan=â€œconsumerâ€] .priority-badge { background: rgba(245,158,11,0.15); color: var(â€“consumer-color); }
-.loan-card[data-loan=â€œvehicleâ€] .priority-badge { background: rgba(16,185,129,0.15); color: var(â€“vehicle-color); }
+.loan-card[data-loan=â€œpl2â€] .priority-badge { background: rgba(239,68,68,0.15); color: var(â€"pl2-color); }
+.loan-card[data-loan=â€œpl1â€] .priority-badge { background: rgba(79,158,255,0.15); color: var(â€"pl1-color); }
+.loan-card[data-loan=â€œconsumerâ€] .priority-badge { background: rgba(245,158,11,0.15); color: var(â€"consumer-color); }
+.loan-card[data-loan=â€œvehicleâ€] .priority-badge { background: rgba(16,185,129,0.15); color: var(â€"vehicle-color); }
 
 .balance-display {
 margin-bottom: 16px;
 }
 .balance-label {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 10px;
-color: var(â€“muted);
+color: var(â€"muted);
 text-transform: uppercase;
 letter-spacing: 1.5px;
 margin-bottom: 4px;
 }
 .balance-amount {
-font-family: var(â€“font-display);
+font-family: var(â€"font-display);
 font-size: 28px;
 font-weight: 700;
 letter-spacing: -1px;
@@ -234,10 +234,10 @@ height: 100%;
 border-radius: 2px;
 transition: width 0.6s ease;
 }
-.loan-card[data-loan=â€œpl2â€] .progress-fill { background: var(â€“pl2-color); }
-.loan-card[data-loan=â€œpl1â€] .progress-fill { background: var(â€“pl1-color); }
-.loan-card[data-loan=â€œconsumerâ€] .progress-fill { background: var(â€“consumer-color); }
-.loan-card[data-loan=â€œvehicleâ€] .progress-fill { background: var(â€“vehicle-color); }
+.loan-card[data-loan=â€œpl2â€] .progress-fill { background: var(â€"pl2-color); }
+.loan-card[data-loan=â€œpl1â€] .progress-fill { background: var(â€"pl1-color); }
+.loan-card[data-loan=â€œconsumerâ€] .progress-fill { background: var(â€"consumer-color); }
+.loan-card[data-loan=â€œvehicleâ€] .progress-fill { background: var(â€"vehicle-color); }
 
 .loan-meta {
 display: grid;
@@ -246,14 +246,14 @@ gap: 12px;
 }
 .meta-item {}
 .meta-label {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 9px;
-color: var(â€“muted);
+color: var(â€"muted);
 text-transform: uppercase;
 letter-spacing: 1.5px;
 }
 .meta-val {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 13px;
 font-weight: 500;
 margin-top: 2px;
@@ -270,20 +270,20 @@ justify-content: space-between;
 align-items: center;
 }
 .tic-label {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 9px;
 color: #ef4444;
 text-transform: uppercase;
 letter-spacing: 1px;
 }
 .tic-val {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 13px;
 font-weight: 500;
 color: #ef4444;
 }
 
-/* â”€â”€ Log Payment Panel â”€â”€ */
+/* â"€â"€ Log Payment Panel â"€â"€ */
 .panel-grid {
 display: grid;
 grid-template-columns: 1fr 1fr;
@@ -293,13 +293,13 @@ margin-bottom: 48px;
 @media (max-width: 800px) { .panel-grid { grid-template-columns: 1fr; } }
 
 .panel {
-background: var(â€“surface);
-border: 1px solid var(â€“border);
-border-radius: var(â€“radius);
+background: var(â€"surface);
+border: 1px solid var(â€"border);
+border-radius: var(â€"radius);
 padding: 28px;
 }
 .panel-title {
-font-family: var(â€“font-display);
+font-family: var(â€"font-display);
 font-size: 16px;
 font-weight: 700;
 margin-bottom: 20px;
@@ -311,35 +311,35 @@ gap: 8px;
 .form-group { margin-bottom: 16px; }
 .form-label {
 display: block;
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 10px;
-color: var(â€“muted);
+color: var(â€"muted);
 text-transform: uppercase;
 letter-spacing: 1.5px;
 margin-bottom: 6px;
 }
 .form-control {
 width: 100%;
-background: var(â€“surface2);
-border: 1px solid var(â€“border);
+background: var(â€"surface2);
+border: 1px solid var(â€"border);
 border-radius: 8px;
-color: var(â€“text);
-font-family: var(â€“font-mono);
+color: var(â€"text);
+font-family: var(â€"font-mono);
 font-size: 14px;
 padding: 10px 14px;
 outline: none;
 transition: border-color 0.2s;
 -webkit-appearance: none;
 }
-.form-control:focus { border-color: var(â€“accent); }
-.form-control option { background: var(â€“surface); }
+.form-control:focus { border-color: var(â€"accent); }
+.form-control option { background: var(â€"surface); }
 
 .btn {
 width: 100%;
 padding: 12px;
 border: none;
 border-radius: 8px;
-font-family: var(â€“font-display);
+font-family: var(â€"font-display);
 font-size: 14px;
 font-weight: 700;
 letter-spacing: 0.5px;
@@ -353,46 +353,46 @@ color: white;
 .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
 .btn-danger {
 background: rgba(239,68,68,0.15);
-color: var(â€“red);
+color: var(â€"red);
 border: 1px solid rgba(239,68,68,0.3);
 margin-top: 8px;
 }
 .btn-danger:hover { background: rgba(239,68,68,0.25); }
 
-/* â”€â”€ Budget Panel â”€â”€ */
+/* â"€â"€ Budget Panel â"€â"€ */
 .budget-rows { display: flex; flex-direction: column; gap: 10px; }
 .budget-row {
 display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 10px 14px;
-background: var(â€“surface2);
+background: var(â€"surface2);
 border-radius: 8px;
 }
 .budget-row-label {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 12px;
-color: var(â€“muted);
+color: var(â€"muted);
 }
 .budget-row-val {
-font-family: var(â€“font-display);
+font-family: var(â€"font-display);
 font-size: 15px;
 font-weight: 700;
 }
-.budget-row.surplus .budget-row-label { color: var(â€“green); }
-.budget-row.surplus .budget-row-val { color: var(â€“green); }
+.budget-row.surplus .budget-row-label { color: var(â€"green); }
+.budget-row.surplus .budget-row-val { color: var(â€"green); }
 
-/* â”€â”€ Payments Table â”€â”€ */
+/* â"€â"€ Payments Table â"€â"€ */
 .table-wrap {
-background: var(â€“surface);
-border: 1px solid var(â€“border);
-border-radius: var(â€“radius);
+background: var(â€"surface);
+border: 1px solid var(â€"border);
+border-radius: var(â€"radius);
 overflow: hidden;
 margin-bottom: 48px;
 }
 .table-header-bar {
 padding: 20px 24px;
-border-bottom: 1px solid var(â€“border);
+border-bottom: 1px solid var(â€"border);
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -400,47 +400,47 @@ flex-wrap: wrap;
 gap: 12px;
 }
 .table-title {
-font-family: var(â€“font-display);
+font-family: var(â€"font-display);
 font-size: 16px;
 font-weight: 700;
 }
 .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
 .pill {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 10px;
 padding: 4px 12px;
 border-radius: 20px;
-border: 1px solid var(â€“border);
+border: 1px solid var(â€"border);
 background: transparent;
-color: var(â€“muted);
+color: var(â€"muted);
 cursor: pointer;
 transition: all 0.2s;
 letter-spacing: 1px;
 text-transform: uppercase;
 }
 .pill.active, .pill:hover {
-background: var(â€“accent);
+background: var(â€"accent);
 color: white;
-border-color: var(â€“accent);
+border-color: var(â€"accent);
 }
 
 table { width: 100%; border-collapse: collapse; }
 th {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 10px;
-color: var(â€“muted);
+color: var(â€"muted);
 text-transform: uppercase;
 letter-spacing: 1.5px;
 padding: 12px 20px;
 text-align: left;
-border-bottom: 1px solid var(â€“border);
+border-bottom: 1px solid var(â€"border);
 white-space: nowrap;
 }
 td {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 13px;
 padding: 14px 20px;
-border-bottom: 1px solid var(â€“border);
+border-bottom: 1px solid var(â€"border);
 }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: rgba(255,255,255,0.02); }
@@ -459,32 +459,32 @@ border-radius: 4px;
 letter-spacing: 1px;
 text-transform: uppercase;
 }
-.type-emi { background: rgba(79,158,255,0.12); color: var(â€“accent); }
-.type-extra { background: rgba(16,185,129,0.12); color: var(â€“green); }
-.type-lumpsum { background: rgba(251,191,36,0.12); color: var(â€“yellow); }
+.type-emi { background: rgba(79,158,255,0.12); color: var(â€"accent); }
+.type-extra { background: rgba(16,185,129,0.12); color: var(â€"green); }
+.type-lumpsum { background: rgba(251,191,36,0.12); color: var(â€"yellow); }
 
 .delete-btn {
 background: none;
 border: none;
-color: var(â€“muted);
+color: var(â€"muted);
 cursor: pointer;
 font-size: 14px;
 padding: 4px 8px;
 border-radius: 4px;
 transition: all 0.2s;
 }
-.delete-btn:hover { color: var(â€“red); background: rgba(239,68,68,0.1); }
+.delete-btn:hover { color: var(â€"red); background: rgba(239,68,68,0.1); }
 
 .empty-state {
 text-align: center;
 padding: 60px 20px;
-color: var(â€“muted);
-font-family: var(â€“font-mono);
+color: var(â€"muted);
+font-family: var(â€"font-mono);
 font-size: 13px;
 }
 .empty-state .icon { font-size: 32px; margin-bottom: 12px; }
 
-/* â”€â”€ Timeline â”€â”€ */
+/* â"€â"€ Timeline â"€â"€ */
 .timeline-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -492,9 +492,9 @@ gap: 12px;
 margin-bottom: 48px;
 }
 .timeline-card {
-background: var(â€“surface);
-border: 1px solid var(â€“border);
-border-radius: var(â€“radius);
+background: var(â€"surface);
+border: 1px solid var(â€"border);
+border-radius: var(â€"radius);
 padding: 20px;
 position: relative;
 }
@@ -507,44 +507,44 @@ border-color: rgba(79,158,255,0.4);
 background: rgba(79,158,255,0.05);
 }
 .tl-phase {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 9px;
-color: var(â€“muted);
+color: var(â€"muted);
 text-transform: uppercase;
 letter-spacing: 2px;
 margin-bottom: 8px;
 }
 .tl-loan {
-font-family: var(â€“font-display);
+font-family: var(â€"font-display);
 font-size: 14px;
 font-weight: 700;
 margin-bottom: 4px;
 }
 .tl-date {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 12px;
-color: var(â€“muted);
+color: var(â€"muted);
 margin-bottom: 12px;
 }
 .tl-status {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 11px;
 padding: 4px 10px;
 border-radius: 6px;
 display: inline-block;
 }
-.tl-status.done { background: rgba(16,185,129,0.15); color: var(â€“green); }
-.tl-status.active { background: rgba(79,158,255,0.15); color: var(â€“accent); }
-.tl-status.pending { background: rgba(255,255,255,0.05); color: var(â€“muted); }
+.tl-status.done { background: rgba(16,185,129,0.15); color: var(â€"green); }
+.tl-status.active { background: rgba(79,158,255,0.15); color: var(â€"accent); }
+.tl-status.pending { background: rgba(255,255,255,0.05); color: var(â€"muted); }
 
-/* â”€â”€ Toast â”€â”€ */
+/* â"€â"€ Toast â"€â"€ */
 #toast {
 position: fixed;
 bottom: 32px; right: 32px;
-background: var(â€“surface);
-border: 1px solid var(â€“green);
-color: var(â€“green);
-font-family: var(â€“font-mono);
+background: var(â€"surface);
+border: 1px solid var(â€"green);
+color: var(â€"green);
+font-family: var(â€"font-mono);
 font-size: 13px;
 padding: 14px 20px;
 border-radius: 10px;
@@ -556,7 +556,7 @@ max-width: 320px;
 }
 #toast.show { transform: translateY(0); opacity: 1; }
 
-/* â”€â”€ Responsive â”€â”€ */
+/* â"€â"€ Responsive â"€â"€ */
 @media (max-width: 600px) {
 .loan-grid { grid-template-columns: 1fr; }
 header { flex-direction: column; align-items: flex-start; }
@@ -566,9 +566,9 @@ th, td { padding: 10px 12px; }
 }
 
 .updated-label {
-font-family: var(â€“font-mono);
+font-family: var(â€"font-mono);
 font-size: 10px;
-color: var(â€“muted);
+color: var(â€"muted);
 text-align: right;
 margin-top: -30px;
 margin-bottom: 40px;
@@ -591,11 +591,11 @@ margin-bottom: 40px;
 </div>
 <div class="header-stats">
 <div class="hstat">
-<div class="hstat-val" id="total-balance-hdr" style="color:var(--red)">â€”</div>
+<div class="hstat-val" id="total-balance-hdr" style="color:var(--red)">â€"</div>
 <div class="hstat-label">Total Debt</div>
 </div>
 <div class="hstat">
-<div class="hstat-val" id="total-interest-hdr" style="color:var(--orange)">â€”</div>
+<div class="hstat-val" id="total-interest-hdr" style="color:var(--orange)">â€"</div>
 <div class="hstat-label">Total Interest</div>
 </div>
 <div class="hstat">
@@ -618,7 +618,7 @@ margin-bottom: 40px;
 ```
 <!-- Budget -->
 <div class="panel">
-<div class="panel-title">ğŸ“Š Monthly Budget</div>
+<div class="panel-title">ğŸ"Š Monthly Budget</div>
 <div class="budget-rows">
 <div class="budget-row">
 <span class="budget-row-label">Monthly Income</span>
@@ -626,15 +626,15 @@ margin-bottom: 40px;
 </div>
 <div class="budget-row">
 <span class="budget-row-label">Total EMIs</span>
-<span class="budget-row-val" id="budget-emis">â€”</span>
+<span class="budget-row-val" id="budget-emis">â€"</span>
 </div>
 <div class="budget-row">
 <span class="budget-row-label">Fixed Expenses</span>
 <span class="budget-row-val">â‚¹30,500</span>
 </div>
 <div class="budget-row surplus">
-<span class="budget-row-label">Monthly Surplus â†’</span>
-<span class="budget-row-val" id="budget-surplus">â€”</span>
+<span class="budget-row-label">Monthly Surplus â†'</span>
+<span class="budget-row-val" id="budget-surplus">â€"</span>
 </div>
 </div>
 
@@ -646,14 +646,14 @@ margin-bottom: 40px;
 
 <!-- Log Payment -->
 <div class="panel">
-<div class="panel-title">ğŸ’³ Log a Payment</div>
+<div class="panel-title">ğŸ'³ Log a Payment</div>
 <div class="form-group">
 <label class="form-label">Loan</label>
 <select class="form-control" id="pay-loan">
-<option value="pl2">Personal Loan 2 â€” HDFC 4343</option>
-<option value="pl1">Personal Loan 1 â€” HDFC 5795</option>
-<option value="consumer">Consumer Loan â€” HDFC 5465</option>
-<option value="vehicle">Vehicle Loan â€” SBI 3161</option>
+<option value="pl2">Personal Loan 2 â€" HDFC 4343</option>
+<option value="pl1">Personal Loan 1 â€" HDFC 5795</option>
+<option value="consumer">Consumer Loan â€" HDFC 5465</option>
+<option value="vehicle">Vehicle Loan â€" SBI 3161</option>
 </select>
 </div>
 <div class="form-group">
@@ -709,7 +709,7 @@ margin-bottom: 40px;
 </tr>
 </thead>
 <tbody id="payments-tbody">
-<tr><td colspan="6"><div class="empty-state"><div class="icon">ğŸ“­</div>No payments logged yet</div></td></tr>
+<tr><td colspan="6"><div class="empty-state"><div class="icon">ğŸ"­</div>No payments logged yet</div></td></tr>
 </tbody>
 </table>
 </div>
@@ -754,7 +754,7 @@ margin-bottom: 40px;
 <div id="toast"></div>
 
 <script>
-// â”€â”€ Initial Loan Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Initial Loan Data â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 const LOANS_INIT = {
 pl2: { name:"Personal Loan 2", bank:"HDFC Bank", ac:"4343", balance:461302, emi:10900, rate:10.9, original:500000, color:"var(--pl2-color)", priority:"#1 ATTACK NOW" },
 pl1: { name:"Personal Loan 1", bank:"HDFC Bank", ac:"5795", balance:986635, emi:39500, rate:10.8, original:1540000, color:"var(--pl1-color)", priority:"#2" },
@@ -763,16 +763,16 @@ vehicle: { name:"Vehicle Loan", bank:"SBI", ac:"3161", balance:270000, emi:10500
 };
 
 const LUMP_SCHEDULE = [
-{ month:"Mar 2026", amount:100000, loan:"pl2", label:"â‚¹1,00,000 â†’ PL2", note:"Transfer NOW" },
-{ month:"May 2026", amount:70000, loan:"pl2", label:"â‚¹70,000 â†’ PL2", note:"May bonus" },
-{ month:"Oct 2026", amount:200000, loan:"consumer", label:"â‚¹2,00,000 â†’ Consumer", note:"Closes Consumer" },
-{ month:"Nov 2026", amount:70000, loan:"consumer", label:"â‚¹70,000 â†’ Consumer", note:"Final close" },
+{ month:"Mar 2026", amount:100000, loan:"pl2", label:"â‚¹1,00,000 â†' PL2", note:"Transfer NOW" },
+{ month:"May 2026", amount:70000, loan:"pl2", label:"â‚¹70,000 â†' PL2", note:"May bonus" },
+{ month:"Oct 2026", amount:200000, loan:"consumer", label:"â‚¹2,00,000 â†' Consumer", note:"Closes Consumer" },
+{ month:"Nov 2026", amount:70000, loan:"consumer", label:"â‚¹70,000 â†' Consumer", note:"Final close" },
 ];
 
 const STORAGE_KEY = "loantracker_payments_v1";
 const BALANCES_KEY = "loantracker_balances_v1";
 
-// â”€â”€ Storage â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Storage â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 function getPayments() {
 try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
 catch(e) { return []; }
@@ -791,9 +791,9 @@ function saveBalances(b) {
 localStorage.setItem(BALANCES_KEY, JSON.stringify(b));
 }
 
-// â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Helpers â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 function inr(n) {
-if (n === null || n === undefined) return "â€”";
+if (n === null || n === undefined) return "â€"";
 return "â‚¹" + Math.abs(Math.round(n)).toLocaleString("en-IN");
 }
 function calcMonthlyInterest(balance, annualRate) {
@@ -815,7 +815,7 @@ const map = { pl2:"#ef4444", pl1:"#4f9eff", consumer:"#f59e0b", vehicle:"#10b981
 return map[key] || "#888";
 }
 
-// â”€â”€ Render Loan Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Render Loan Cards â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 function renderCards() {
 const balances = getBalances();
 const container = document.getElementById("loan-cards");
@@ -886,7 +886,7 @@ document.getElementById("budget-surplus").textContent = inr(surplus);
 document.getElementById("surplus-hdr").textContent = inr(surplus);
 }
 
-// â”€â”€ Render Lump Schedule â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Render Lump Schedule â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 function renderLumpSchedule() {
 const container = document.getElementById("lump-schedule");
 container.innerHTML = "";
@@ -908,7 +908,7 @@ container.appendChild(div);
 });
 }
 
-// â”€â”€ Log Payment â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Log Payment â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 function logPayment() {
 const loan = document.getElementById("pay-loan").value;
 const type = document.getElementById("pay-type").value;
@@ -916,8 +916,8 @@ const amount = parseFloat(document.getElementById("pay-amount").value);
 const date = document.getElementById("pay-date").value;
 const note = document.getElementById("pay-note").value.trim();
 
-if (!amount || amount <= 0) { showToast("âš ï¸ Please enter a valid amount", true); return; }
-if (!date) { showToast("âš ï¸ Please select a date", true); return; }
+if (!amount || amount <= 0) { showToast("âš ï¸ Please enter a valid amount", true); return; }
+if (!date) { showToast("âš ï¸ Please select a date", true); return; }
 
 const payments = getPayments();
 payments.unshift({ id: Date.now(), loan, type, amount, date, note });
@@ -937,7 +937,7 @@ renderTable("all");
 showToast(`âœ… ${inr(amount)} recorded for ${LOANS_INIT[loan].name}`);
 }
 
-// â”€â”€ Render Table â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Render Table â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 let currentFilter = "all";
 
 function filterPayments(filter, el) {
@@ -953,7 +953,7 @@ const tbody = document.getElementById("payments-tbody");
 const filtered = filter === "all" ? payments : payments.filter(p => p.loan === filter);
 
 if (!filtered.length) {
-tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><div class="icon">ğŸ“­</div>No payments logged yet</div></td></tr>`;
+tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><div class="icon">ğŸ"­</div>No payments logged yet</div></td></tr>`;
 return;
 }
 
@@ -971,14 +971,14 @@ ${loan?.name ?? p.loan} <span style="color:var(--muted)">Â·Â·Â·${loan?.ac ?? ""}
 </td>
 <td><span class="type-badge ${typeClass}">${typeLabel}</span></td>
 <td style="color:var(--green);font-weight:500">${inr(p.amount)}</td>
-<td style="color:var(--muted)">${p.note || "â€”"}</td>
+<td style="color:var(--muted)">${p.note || "â€""}</td>
 <td><button class="delete-btn" onclick="deletePayment(${p.id})">âœ•</button></td>
 </tr>
 `;
 }).join("");
 }
 
-// â”€â”€ Delete Payment â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Delete Payment â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 function deletePayment(id) {
 const payments = getPayments();
 const p = payments.find(x => x.id === id);
@@ -996,10 +996,10 @@ const updated = payments.filter(x => x.id !== id);
 savePayments(updated);
 renderCards();
 renderTable(currentFilter);
-showToast("ğŸ—‘ï¸ Payment deleted and balance restored");
+showToast("ğŸ-'ï¸ Payment deleted and balance restored");
 }
 
-// â”€â”€ Toast â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Toast â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 function showToast(msg, isError = false) {
 const t = document.getElementById("toast");
 t.textContent = msg;
@@ -1009,7 +1009,7 @@ t.classList.add("show");
 setTimeout(() => t.classList.remove("show"), 3000);
 }
 
-// â”€â”€ Init â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Init â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 document.getElementById("pay-date").valueAsDate = new Date();
 renderCards();
 renderLumpSchedule();
@@ -1018,3 +1018,4 @@ renderTable("all");
 
 </body>
 </html>
+
